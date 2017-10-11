@@ -5,42 +5,53 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class MottoTemplate {
+public class HeroTemplate {
 
     @Id
     private String id;
+    /**
+     * 英雄名称
+     */
+    private String heroName;
 
+    /**
+     * 英雄类型
+     */
+    private String heroType;
 
-    private String templateName;
+    /**
+     * 英雄属国
+     */
+    private String heroPosition;
 
-
-    private String templateType;
-
-
-    private String templatePosition;
-
-
+    /**
+     * 创建时间
+     */
     private String createTime;
 
-
+    /**
+     * 修改时间
+     */
     private String modifiedTime;
 
+    /**
+     * 操作人
+     */
     private String operator;
 
-    public MottoTemplate(String id, String templateName, String templateType, String templatePosition, String createTime, String modifiedTime, String operator) {
+    public HeroTemplate(String id, String heroName, String heroType, String heroPosition, String createTime, String modifiedTime, String operator) {
         this.id = id;
-        this.templateName = templateName;
-        this.templateType = templateType;
-        this.templatePosition = templatePosition;
+        this.heroName = heroName;
+        this.heroType = heroType;
+        this.heroPosition = heroPosition;
         this.createTime = createTime;
         this.modifiedTime = modifiedTime;
         this.operator = operator;
     }
 
-    public MottoTemplate() {
+    public HeroTemplate() {
+
     }
-
-
 
     public String getId() {
         return id;
@@ -50,28 +61,28 @@ public class MottoTemplate {
         this.id = id;
     }
 
-    public String getTemplateName() {
-        return templateName;
+    public String getHeroName() {
+        return heroName;
     }
 
-    public void setTemplateName(String templateName) {
-        this.templateName = templateName;
+    public void setHeroName(String heroName) {
+        this.heroName = heroName;
     }
 
-    public String getTemplateType() {
-        return templateType;
+    public String getHeroType() {
+        return heroType;
     }
 
-    public void setTemplateType(String templateType) {
-        this.templateType = templateType;
+    public void setHeroType(String heroType) {
+        this.heroType = heroType;
     }
 
-    public String getTemplatePosition() {
-        return templatePosition;
+    public String getHeroPosition() {
+        return heroPosition;
     }
 
-    public void setTemplatePosition(String templatePosition) {
-        this.templatePosition = templatePosition;
+    public void setHeroPosition(String heroPosition) {
+        this.heroPosition = heroPosition;
     }
 
     public String getCreateTime() {
@@ -100,11 +111,11 @@ public class MottoTemplate {
 
     @Override
     public String toString() {
-        return "MottoTemplate{" +
+        return "HeroTemplate{" +
                 "id='" + id + '\'' +
-                ", templateName='" + templateName + '\'' +
-                ", templateType='" + templateType + '\'' +
-                ", templatePosition='" + templatePosition + '\'' +
+                ", heroName='" + heroName + '\'' +
+                ", heroType='" + heroType + '\'' +
+                ", heroPosition='" + heroPosition + '\'' +
                 ", createTime='" + createTime + '\'' +
                 ", modifiedTime='" + modifiedTime + '\'' +
                 ", operator='" + operator + '\'' +
