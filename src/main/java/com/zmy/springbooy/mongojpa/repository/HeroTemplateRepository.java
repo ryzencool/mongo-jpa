@@ -15,13 +15,24 @@ public interface HeroTemplateRepository extends ReactiveMongoRepository<HeroTemp
 
     Flux<HeroTemplate> findByHeroName(String templateName);
 
+
     Flux<HeroTemplate> findByHeroType(String templateType, Pageable pageable);
 
+    /**
+     * 查询两段时间之间的记录
+     * @param createTime
+     * @param modifiedTime
+     * @return
+     */
     Flux<HeroTemplate> findByCreateTimeGreaterThanEqualAndModifiedTimeLessThanEqual(String createTime, String modifiedTime);
 
     Mono<Integer> countByHeroType(String templateType);
 
+    /**
+     * 模糊查询
+     * @param templateName
+     * @return
+     */
     Flux<HeroTemplate> findByHeroNameContaining(String templateName);
-
 
 }
