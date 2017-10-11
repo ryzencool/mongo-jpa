@@ -4,46 +4,27 @@ package com.zmy.springbooy.mongojpa.enity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/**
- * CRM每日箴言模板
- */
 @Document
 public class MottoTemplate {
 
-    /**
-     * 模版id
-     */
     @Id
     private String id;
 
-    /**
-     * 模版名称
-     */
+
     private String templateName;
 
-    /**
-     * 模版类型
-     */
+
     private String templateType;
 
-    /**
-     * logo，banner 的位置
-     */
+
     private String templatePosition;
 
-    /**
-     * 创建时间
-     */
+
     private String createTime;
 
-    /**
-     * 修改时间
-     */
+
     private String modifiedTime;
 
-    /**
-     * 操作人
-     */
     private String operator;
 
     public MottoTemplate(String id, String templateName, String templateType, String templatePosition, String createTime, String modifiedTime, String operator) {
