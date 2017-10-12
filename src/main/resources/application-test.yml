@@ -1,9 +1,10 @@
 spring:
   data:
     mongodb:
-      host:
+      host: localhost
       port: 27017
 server:
   port: 8088
-logging:
-  config: classpath:logging-dev.xml
+
+myroperties:
+  name: zmy

@@ -5,7 +5,6 @@ import com.zmy.springbooy.mongojpa.enity.HeroTemplate;
 import com.zmy.springbooy.mongojpa.repository.HeroTemplateRepository;
 import com.zmy.springbooy.mongojpa.util.DateUtil;
 import com.zmy.springbooy.mongojpa.util.TestConfigurationProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.PageRequest;
@@ -59,18 +58,23 @@ public class MottoController {
     }
 
     /**
-     * 聚合操作
+     * 聚合操作,查询某个模板的
      */
     @GetMapping("/testAggregation")
-    public Flux<HeroResult> testAggregation() {
+    public Flux<Map<String, Object>> testAggregation() {
         Aggregation aggregation = newAggregation(
                 group("heroType").count().as("count").first("heroType").as("name"),
                 project("name", "count"),
                 sort(Sort.Direction.DESC, "count"),
                 match(Criteria.where("count").gt(0))
         );
-        Flux<HeroResult> heroResults = reactiveMongoTemplate.aggregate(aggregation, "heroTemplate", HeroResult.class);
-        return heroResults;
+        return reactiveMongoTemplate.aggregate(aggregation, "heroTemplate", HeroResult.class)
+                .map(i -> {
+                    Map<String, Object> tempMap = new HashMap<>();
+                    tempMap.put("name", i.getName());
+                    tempMap.put("count", i.getCount());
+                    return tempMap;
+                });
     }
 
 
