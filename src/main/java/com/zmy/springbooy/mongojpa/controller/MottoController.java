@@ -22,6 +22,7 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
@@ -89,6 +90,9 @@ public class MottoController {
                 group("heroType").first("heroType").as("type"),
                 project("type")
         );
+
+
+
         return reactiveMongoTemplate.aggregate(aggregation, "heroTemplate", HeroResult.class)
                 .map(i -> {
                     Map<String, Object> tempMap = new HashMap<>();
