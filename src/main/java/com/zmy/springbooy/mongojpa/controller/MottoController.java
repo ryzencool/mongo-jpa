@@ -12,13 +12,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -92,7 +94,6 @@ public class MottoController {
         );
 
 
-
         return reactiveMongoTemplate.aggregate(aggregation, "heroTemplate", HeroResult.class)
                 .map(i -> {
                     Map<String, Object> tempMap = new HashMap<>();
@@ -162,6 +163,23 @@ public class MottoController {
                                 .withMatcher("heroName", i -> i.startsWith())));
 
     }
+
+    @PostMapping("/upload")
+    public Mono<Void> upload(@RequestPart("file") FilePart filePart) {
+        File file = new File("D:\\temp\\picture\\a.png");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        filePart.transferTo(file);
+        return Mono.empty();
+    }
+
+//    @GetMapping(value = "/getHeroWithInterval", produces = "application/stream+json")
+//    public Flux<Tuple2<HeroTemplate, Long>> getHeroTemplateInterval() {
+//        Flux<HeroTemplateheroTemplateRepository.findAll();
+//    }
 
 
 }
